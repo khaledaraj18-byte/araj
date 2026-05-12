@@ -557,30 +557,14 @@
     position: relative;
     width: 100%;
     overflow: hidden;
-  }
-  /* Edge fade — using overlays instead of mask-image for mobile compatibility */
-  .marquee::before, .marquee::after {
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0;
-    width: 80px;
-    z-index: 5;
-    pointer-events: none;
-  }
-  .marquee::before {
-    left: 0;
-    background: linear-gradient(90deg, var(--bg-deep) 0%, rgba(10, 6, 18, 0.85) 35%, transparent 100%);
-  }
-  .marquee::after {
-    right: 0;
-    background: linear-gradient(-90deg, var(--bg-deep) 0%, rgba(10, 6, 18, 0.85) 35%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
   }
   .marquee-track {
     display: flex;
     width: max-content;
     animation: marquee-scroll 32s linear infinite;
     gap: 1.5rem;
-    will-change: transform;
   }
   .marquee:hover .marquee-track { animation-play-state: paused; }
 
@@ -621,30 +605,27 @@
     border-radius: 18px;
     overflow: hidden;
     background: #ffffff;
-    padding: 8px;
     box-shadow: 0 8px 28px -10px rgba(124, 58, 237, 0.45), 0 0 0 1px rgba(255,255,255,0.05);
-    transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
   }
   .company-chip .c-logo svg,
   .company-chip .c-logo img {
-    display: block;
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
     object-fit: contain;
     image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
   }
   .company-chip .c-logo img {
-    position: relative;
     z-index: 1;
+    padding: 8px;
+    background: #ffffff;
   }
   .company-chip .c-logo svg {
-    position: absolute;
-    inset: 8px;
-    width: calc(100% - 16px);
-    height: calc(100% - 16px);
     z-index: 0;
   }
+  /* When .ico has no real image (background only), tint the bg */
+  .company-chip .c-logo.no-image { background: linear-gradient(135deg, var(--purple-deep), var(--purple-rich)); }
 
   @media (max-width: 900px) {
     .company-chip { width: 180px; height: 160px; padding: 1.25rem 0.85rem; }
@@ -2382,12 +2363,12 @@
 
   // Build company marquee — uses real .ico files with inline SVG fallback
   const companies = [
-    { name: 'Shgardi',          sub: 'B2C Delivery App',          key: 'shgardi'  },
-    { name: 'Squadio',          sub: 'Tech Studio',               key: 'squadio'  },
     { name: 'Qawafel',          sub: 'B2B MP & FinTech', key: 'qawafel'  },
     { name: 'Al-Rajhi Bank',    sub: 'Banking Partner',           key: 'alrajhi'  },
     { name: 'Takamol Holding',  sub: 'GovTech',                   key: 'takamol'  },
     { name: 'Innovate Gate',    sub: 'Entrepreneurship',          key: 'igate'    },
+    { name: 'Shgardi',          sub: 'B2C Delivery App',          key: 'shgardi'  },
+    { name: 'Squadio',          sub: 'Tech Studio',               key: 'squadio'  },
     { name: 'Misaan Nosooh',    sub: 'Wealth Management',         key: 'misaan'   },
     { name: 'Misaan Dawul',     sub: 'P2P FinTech',               key: 'dawul'    },
     { name: 'Munaaseb',         sub: 'PropTech',                  key: 'munaaseb' },
@@ -2402,7 +2383,7 @@
       <div class="company-chip"${dup ? ' aria-hidden="true"' : ''}>
         <div class="c-logo">
           ${svg}
-          <img src="logos/${c.key}.png" alt="${c.name}" decoding="async" onerror="this.remove()" />
+          <img src="logos/${c.key}.png" alt="${c.name}" loading="lazy" onerror="this.remove()" />
         </div>
         <div class="c-name">${c.name}</div>
         <div class="c-sub">${c.sub}</div>
