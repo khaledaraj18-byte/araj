@@ -2380,7 +2380,7 @@
       <div class="company-chip"${dup ? ' aria-hidden="true"' : ''}>
         <div class="c-logo">
           ${svg}
-          <img src="logos/${c.key}.ico" alt="${c.name}" loading="lazy" onerror="this.remove()" />
+          <img src="logos/${c.key}.png" alt="${c.name}" loading="lazy" onerror="this.remove()" />
         </div>
         <div class="c-name">${c.name}</div>
         <div class="c-sub">${c.sub}</div>
@@ -2398,7 +2398,7 @@
     const wrap = document.createElement('div');
     wrap.className = 'product-logo';
     wrap.innerHTML = (LOGOS[key] || '') +
-      `<img src="logos/${key}.ico" alt="" loading="lazy" onerror="this.remove()" />`;
+      `<img src="logos/${key}.png" alt="" loading="lazy" onerror="this.remove()" />`;
     card.insertBefore(wrap, card.firstChild);
   });
 
