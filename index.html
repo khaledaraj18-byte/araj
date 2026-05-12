@@ -251,6 +251,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1.5rem;
   }
 
   .logo {
@@ -448,40 +449,54 @@
 
   .about-frame {
     position: relative;
-    aspect-ratio: 3/4;
-    border-radius: 8px;
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 1;
+    border-radius: 50%;
     overflow: hidden;
     background: linear-gradient(135deg, var(--purple-deep) 0%, var(--bg-elev) 100%);
-    border: 1px solid var(--border-strong);
-    box-shadow: 0 30px 80px -30px rgba(124, 58, 237, 0.5);
+    border: 2px solid var(--border-strong);
+    box-shadow: 0 30px 80px -20px rgba(124, 58, 237, 0.55);
+    margin: 0 auto;
+    isolation: isolate;
   }
   .about-frame img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 30%;
-    filter: grayscale(15%) contrast(1.05);
+    object-position: center top;
+    transform: scale(1.45);
+    transform-origin: center 28%;
+    filter: grayscale(10%) contrast(1.05);
     transition: filter 0.5s ease, transform 0.6s ease;
   }
   .about-frame:hover img {
     filter: grayscale(0%) contrast(1.05);
-    transform: scale(1.03);
+    transform: scale(1.5);
+    transform-origin: center 28%;
   }
   .about-frame::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 50%, rgba(10, 6, 18, 0.55) 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 -40px 80px -40px rgba(10, 6, 18, 0.6);
     pointer-events: none;
   }
   .about-frame::before {
     content: '';
     position: absolute;
-    inset: -2px;
-    background: linear-gradient(135deg, var(--purple-glow), transparent 50%, var(--gold));
+    inset: -8px;
+    background: conic-gradient(from 0deg, var(--purple-glow), var(--purple-soft), var(--gold), var(--purple-glow));
     z-index: -1;
-    border-radius: 10px;
-    opacity: 0.5;
+    border-radius: 50%;
+    opacity: 0.55;
+    animation: spin-ring 14s linear infinite;
+    filter: blur(2px);
+  }
+  @keyframes spin-ring {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
   }
 
   .about-text p {
@@ -523,6 +538,212 @@
     color: var(--text-muted);
     margin-top: 0.5rem;
   }
+
+  /* ===== Companies Marquee ===== */
+  .companies-section {
+    padding: 7rem 0;
+    position: relative;
+  }
+  .companies-section .container {
+    margin-bottom: 4rem;
+    padding: 0 2rem;
+  }
+  @media (max-width: 900px) {
+    .companies-section { padding: 5rem 0; }
+    .companies-section .container { margin-bottom: 3rem; padding: 0 1.5rem; }
+  }
+  .marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 32s linear infinite;
+    gap: 1.5rem;
+  }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .company-chip {
+    flex-shrink: 0;
+    width: 230px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(26, 17, 48, 0.5) 0%, rgba(17, 10, 31, 0.3) 100%);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    color: var(--text-secondary);
+  }
+  .company-chip:hover {
+    border-color: var(--purple-soft);
+    background: rgba(74, 29, 150, 0.18);
+    color: var(--text-primary);
+    transform: translateY(-4px);
+  }
+  .company-chip .c-logo {
+    position: relative;
+    width: 88px; height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 8px 28px -10px rgba(124, 58, 237, 0.45), 0 0 0 1px rgba(255,255,255,0.05);
+  }
+  .company-chip .c-logo svg,
+  .company-chip .c-logo img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+  .company-chip .c-logo img {
+    z-index: 1;
+    padding: 8px;
+    background: #ffffff;
+  }
+  .company-chip .c-logo svg {
+    z-index: 0;
+  }
+  /* When .ico has no real image (background only), tint the bg */
+  .company-chip .c-logo.no-image { background: linear-gradient(135deg, var(--purple-deep), var(--purple-rich)); }
+
+  @media (max-width: 900px) {
+    .company-chip { width: 180px; height: 160px; padding: 1.25rem 0.85rem; }
+    .company-chip .c-logo { width: 72px; height: 72px; border-radius: 14px; }
+  }
+  .company-chip .c-name {
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+    text-align: center;
+    line-height: 1.2;
+  }
+  .company-chip .c-sub {
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ===== Mobile Burger / Drawer ===== */
+  .burger {
+    display: none;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--border-strong);
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+    transition: border-color 0.3s ease;
+  }
+  .burger:hover { border-color: var(--purple-soft); }
+  .burger span {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 1.5px;
+    background: var(--text-primary);
+    border-radius: 1px;
+    transition: all 0.35s ease;
+  }
+  .burger span:nth-child(1) { top: 14px; }
+  .burger span:nth-child(2) { top: 20px; width: 14px; }
+  .burger span:nth-child(3) { top: 26px; }
+  body.menu-open .burger span:nth-child(1) {
+    top: 20px; transform: translateX(-50%) rotate(45deg);
+  }
+  body.menu-open .burger span:nth-child(2) {
+    opacity: 0; transform: translateX(-50%) scale(0);
+  }
+  body.menu-open .burger span:nth-child(3) {
+    top: 20px; transform: translateX(-50%) rotate(-45deg);
+  }
+
+  .mobile-drawer {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 6, 18, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+  body.menu-open .mobile-drawer {
+    opacity: 1;
+    visibility: visible;
+  }
+  .mobile-drawer ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+  .mobile-drawer a {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.3s ease;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease, color 0.3s ease;
+  }
+  .mobile-drawer a:hover { color: var(--purple-soft); }
+  body.menu-open .mobile-drawer a { transform: translateY(0); opacity: 1; }
+  body.menu-open .mobile-drawer li:nth-child(1) a { transition-delay: 0.10s; }
+  body.menu-open .mobile-drawer li:nth-child(2) a { transition-delay: 0.16s; }
+  body.menu-open .mobile-drawer li:nth-child(3) a { transition-delay: 0.22s; }
+  body.menu-open .mobile-drawer li:nth-child(4) a { transition-delay: 0.28s; }
+  body.menu-open .mobile-drawer li:nth-child(5) a { transition-delay: 0.34s; }
+  body.menu-open .mobile-drawer li:nth-child(6) a { transition-delay: 0.40s; }
+  body.menu-open .mobile-drawer li:nth-child(7) a { transition-delay: 0.46s; }
+
+  .drawer-tagline {
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease 0.48s;
+  }
+  body.menu-open .drawer-tagline { opacity: 1; transform: translateY(0); }
 
   /* ===== Experience Timeline ===== */
   .timeline {
@@ -696,32 +917,62 @@
     gap: 1rem;
   }
   .product-card {
-    padding: 1.5rem 1.25rem;
+    padding: 1.75rem 1.25rem 1.5rem;
     background: rgba(26, 17, 48, 0.4);
     border: 1px solid var(--border);
-    border-radius: 6px;
+    border-radius: 8px;
     text-align: center;
     transition: all 0.3s ease;
     cursor: default;
     backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
   }
   .product-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
     background: rgba(74, 29, 150, 0.15);
     border-color: var(--purple-soft);
+    box-shadow: 0 18px 36px -18px rgba(124, 58, 237, 0.4);
   }
+  .product-card .product-logo {
+    position: relative;
+    width: 64px; height: 64px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 6px 22px -8px rgba(124, 58, 237, 0.4), 0 0 0 1px rgba(255,255,255,0.05);
+    flex-shrink: 0;
+  }
+  .product-card .product-logo svg,
+  .product-card .product-logo img {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+  }
+  .product-card .product-logo img {
+    z-index: 1;
+    padding: 6px;
+    background: #ffffff;
+  }
+  .product-card .product-logo svg { z-index: 0; }
   .product-card .pname {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.15rem;
+    font-size: 1.18rem;
     color: var(--text-primary);
     font-weight: 600;
+    line-height: 1.2;
   }
   .product-card .ptype {
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--text-muted);
-    margin-top: 0.35rem;
+    margin-top: 0.2rem;
+    line-height: 1.4;
   }
 
   /* ===== Case Studies ===== */
@@ -923,6 +1174,83 @@
     letter-spacing: 0.05em;
   }
 
+  /* ===== Beyond Work ===== */
+  .beyond-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .beyond-card {
+    position: relative;
+    padding: 2.75rem 2rem;
+    background: linear-gradient(180deg, rgba(26, 17, 48, 0.55) 0%, rgba(17, 10, 31, 0.35) 100%);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    backdrop-filter: blur(12px);
+    text-align: center;
+    transition: all 0.4s ease;
+    overflow: hidden;
+  }
+  .beyond-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--purple-soft), transparent);
+    transition: width 0.5s ease;
+  }
+  .beyond-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+    box-shadow: 0 20px 40px -20px rgba(124, 58, 237, 0.45);
+  }
+  .beyond-card:hover::before { width: 80%; }
+
+  .beyond-icon {
+    width: 64px; height: 64px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple-deep), var(--purple-rich));
+    color: var(--purple-soft);
+    box-shadow: 0 10px 30px -10px rgba(124, 58, 237, 0.55);
+  }
+  .beyond-icon svg { width: 28px; height: 28px; }
+
+  .beyond-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--purple-soft);
+    margin-bottom: 0.5rem;
+  }
+  .beyond-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.85rem;
+    line-height: 1.2;
+  }
+  .beyond-body {
+    font-size: 0.94rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  .beyond-body em {
+    font-style: italic;
+    color: var(--purple-soft);
+  }
+
+  @media (max-width: 900px) {
+    .beyond-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+    .beyond-card { padding: 2.25rem 1.75rem; }
+  }
+
   /* ===== Contact ===== */
   .contact {
     text-align: center;
@@ -1030,6 +1358,7 @@
     nav { padding: 1rem 1.5rem; }
     nav.scrolled { padding: 0.75rem 1.5rem; }
     .nav-links { display: none; }
+    .burger { display: block; }
     .logo { font-size: 1.4rem; }
 
     section { padding: 5rem 1.5rem; }
@@ -1137,6 +1466,21 @@
     .orb { filter: blur(60px); }
     .orb-3, .orb-4 { display: none; }
     .bg-grid { background-size: 40px 40px; }
+
+    /* Marquee tighter on phones */
+    .company-chip {
+      width: 150px;
+      min-width: 150px;
+      height: 96px;
+      padding: 0.85rem 1rem;
+    }
+    .company-chip .c-logo { width: 32px; height: 32px; font-size: 0.95rem; }
+    .company-chip .c-name { font-size: 0.82rem; }
+    .company-chip .c-sub { font-size: 0.6rem; letter-spacing: 0.14em; }
+    .companies-section { padding: 3rem 0 2.5rem; }
+    .companies-eyebrow { font-size: 0.66rem; margin-bottom: 1.75rem; }
+
+    .mobile-drawer a { font-size: 1.65rem; }
   }
 
   /* Small phones */
@@ -1190,10 +1534,28 @@
       <li><a href="#skills">Skills</a></li>
       <li><a href="#products">Products</a></li>
       <li><a href="#cases">Case Studies</a></li>
+      <li><a href="#beyond">Beyond</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="burger" id="burger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- Mobile drawer -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#cases">Case Studies</a></li>
+    <li><a href="#beyond">Beyond</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="drawer-tagline">Khaled M. Araj · Lead Product Manager</div>
+</div>
 
 <!-- Hero -->
 <section class="hero" id="home">
@@ -1263,6 +1625,22 @@
   </div>
 </section>
 
+<!-- Companies I've worked with -->
+<section class="companies-section" id="partners" aria-label="Companies and partners">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Trusted By</div>
+      <h2 class="section-title">Companies &amp; Partners I've Worked With</h2>
+      <div class="section-divider"></div>
+    </div>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track" id="marqueeTrack">
+      <!-- Generated by script for clean duplication -->
+    </div>
+  </div>
+</section>
+
 <!-- Experience -->
 <section id="experience">
   <div class="container">
@@ -1280,8 +1658,8 @@
         <div class="tl-company">Qawafel</div>
         <div class="tl-meta">B2B · Riyadh · Full-time · Hybrid</div>
         <ul class="tl-points">
-          <li>Led middleware integrations (Odoo, Qoyod, SAP) for enterprise onboarding.</li>
-          <li>Managed Al-Rajhi Bank partnership to unlock SME financial services.</li>
+          <li>Led integrations between Qawafel and ERPs (Xero, Qoyod, SAP …etc) and owned the middlewares (Reachware and ActivePieces).</li>
+          <li>Owned the Al-Rajhi Bank partnership end-to-end — bridging Qawafel and ARB on SME financing, aligning legal, product, and tech tracks, and managing all stakeholders across both sides.</li>
           <li>Owned product roadmap, KPIs, and OKRs across teams.</li>
           <li>Ran sprint planning and authored PRDs.</li>
         </ul>
@@ -1573,16 +1951,16 @@
     </div>
 
     <div class="products-grid reveal">
-      <div class="product-card"><div class="pname">Qawafel Apex</div><div class="ptype">Automated SME Financing Platform</div></div>
-      <div class="product-card"><div class="pname">iGate</div><div class="ptype">Entrepreneurship Platform</div></div>
-      <div class="product-card"><div class="pname">Munaaseb</div><div class="ptype">PropTech · KSA</div></div>
-      <div class="product-card"><div class="pname">Amlak.sy</div><div class="ptype">PropTech · Syrian Market</div></div>
-      <div class="product-card"><div class="pname">Musaned</div><div class="ptype">Takamol Holding</div></div>
-      <div class="product-card"><div class="pname">Qawafel Marketplace</div><div class="ptype">B2B Marketplace</div></div>
-      <div class="product-card"><div class="pname">Qawafel Merchant</div><div class="ptype">Merchant Platform</div></div>
-      <div class="product-card"><div class="pname">Shgardi Partner</div><div class="ptype">Logistics</div></div>
-      <div class="product-card"><div class="pname">Misaan Dawul</div><div class="ptype">Social Trading</div></div>
-      <div class="product-card"><div class="pname">Misaan Nosooh</div><div class="ptype">Wealth Management</div></div>
+      <div class="product-card" data-logo="qawafel"><div class="pname">Qawafel Apex</div><div class="ptype">Automated SME Financing Platform</div></div>
+      <div class="product-card" data-logo="igate"><div class="pname">iGate</div><div class="ptype">Entrepreneurship Platform</div></div>
+      <div class="product-card" data-logo="munaaseb"><div class="pname">Munaaseb</div><div class="ptype">PropTech · KSA</div></div>
+      <div class="product-card" data-logo="amlak"><div class="pname">Amlak.sy</div><div class="ptype">PropTech · Syrian Market</div></div>
+      <div class="product-card" data-logo="takamol"><div class="pname">Musaned</div><div class="ptype">Takamol Holding</div></div>
+      <div class="product-card" data-logo="qawafel"><div class="pname">Qawafel Marketplace</div><div class="ptype">B2B Marketplace</div></div>
+      <div class="product-card" data-logo="qawafel"><div class="pname">Qawafel Merchant</div><div class="ptype">Merchant Platform</div></div>
+      <div class="product-card" data-logo="shgardi"><div class="pname">Shgardi Partner</div><div class="ptype">Logistics</div></div>
+      <div class="product-card" data-logo="dawul"><div class="pname">Misaan Dawul</div><div class="ptype">Social Trading</div></div>
+      <div class="product-card" data-logo="misaan"><div class="pname">Misaan Nosooh</div><div class="ptype">Wealth Management</div></div>
     </div>
   </div>
 </section>
@@ -1725,6 +2103,71 @@
         </div>
       </article>
 
+      <!-- Case Study 3: Innovate Gate -->
+      <article class="case-card reveal">
+        <div class="case-header">
+          <div class="case-meta">
+            <div class="case-eyebrow">Innovate Gate · Entrepreneurship Platform</div>
+            <h3 class="case-title">Bringing Entrepreneurship into Saudi Universities</h3>
+            <div class="case-subtitle">Lead Product Manager · Strategy &amp; Partnerships</div>
+          </div>
+          <div class="case-headline-metric">
+            <div class="big">+40%</div>
+            <div class="small">User Growth</div>
+          </div>
+        </div>
+
+        <div class="case-grid">
+          <div class="case-block">
+            <div class="case-block-label">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Problem
+            </div>
+            <p class="case-block-body">
+              iGate's pipeline of student-led ventures was thin. Limited reach into Saudi
+              universities meant fewer qualified entrepreneurs entering the platform and
+              a slower growth curve.
+            </p>
+          </div>
+
+          <div class="case-block">
+            <div class="case-block-label">
+              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Role
+            </div>
+            <p class="case-block-body">
+              Led iGate's growth and partnerships track end-to-end — from strategy and
+              outreach to drafting agreements and aligning legal, academic, and product
+              stakeholders.
+            </p>
+          </div>
+
+          <div class="case-block">
+            <div class="case-block-label">
+              <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              Decision
+            </div>
+            <p class="case-block-body">
+              Signed MOUs with governmental universities including IMAMU and KKU,
+              embedding iGate's entrepreneurship services directly into student and
+              researcher journeys.
+            </p>
+          </div>
+
+          <div class="case-block result">
+            <div class="case-block-label">
+              <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><polyline points="7 14 12 9 16 13 21 8"/></svg>
+              Result
+            </div>
+            <p class="case-block-body">
+              <strong>+40%</strong> user growth, a healthier pipeline of student-led
+              projects, and entrepreneurship services reaching researchers across two
+              major universities.
+            </p>
+          </div>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
@@ -1783,6 +2226,73 @@
   </div>
 </section>
 
+<!-- Beyond Work -->
+<section id="beyond">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Other Chapters</div>
+      <h2 class="section-title">Beyond Work</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="beyond-grid">
+
+      <div class="beyond-card reveal">
+        <div class="beyond-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          </svg>
+        </div>
+        <div class="beyond-eyebrow">Author</div>
+        <h3 class="beyond-title">The Best Gate for GAT</h3>
+        <p class="beyond-body">
+          Authored a study guide for the Saudi General Aptitude Test (GAT/قياس),
+          built to help students approach the exam with sharper structure and
+          stronger fundamentals.
+        </p>
+      </div>
+
+      <div class="beyond-card reveal">
+        <div class="beyond-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <line x1="12" y1="19" x2="12" y2="23"/>
+            <line x1="8" y1="23" x2="16" y2="23"/>
+          </svg>
+        </div>
+        <div class="beyond-eyebrow">Public Speaking</div>
+        <h3 class="beyond-title">Toastmasters Member</h3>
+        <p class="beyond-body">
+          Active member of <em>Toastmasters International</em> — sharpening
+          communication, storytelling, and leadership through structured speaking
+          and feedback.
+        </p>
+      </div>
+
+      <div class="beyond-card reveal">
+        <div class="beyond-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+            <path d="M7 10l3 2-3 2z" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="beyond-eyebrow">On Stage</div>
+        <h3 class="beyond-title">MC &amp; Presenter</h3>
+        <p class="beyond-body">
+          Hosting and presenting at events, panels, and community gatherings —
+          comfortable on stage and behind the mic when the room needs a steady
+          voice.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- Contact -->
 <section id="contact" class="contact">
   <div class="container reveal">
@@ -1821,10 +2331,96 @@
 </footer>
 
 <script>
+  // ===== Inline brand SVGs (so logos always render, no external files needed) =====
+  const LOGOS = {
+    qawafel: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#1c160e"/><circle cx="32" cy="32" r="20" fill="none" stroke="#f1e8d4" stroke-width="3"/><path d="M22 36 Q26 24 36 28 Q40 30 42 34" fill="none" stroke="#f1e8d4" stroke-width="3" stroke-linecap="round"/><circle cx="40" cy="28" r="1.8" fill="#f1e8d4"/><path d="M42 34 L46 38" stroke="#f1e8d4" stroke-width="3" stroke-linecap="round"/></svg>`,
+
+    alrajhi: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#ffffff"/><g fill="none" stroke="#0016ff" stroke-width="3" stroke-linejoin="round"><polygon points="32,14 41,19 41,29 32,34 23,29 23,19"/><polygon points="22,30 31,35 31,45 22,50 13,45 13,35"/><polygon points="42,30 51,35 51,45 42,50 33,45 33,35"/></g></svg>`,
+
+    takamol: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#2b2e7a"/><text x="32" y="38" font-family="Tahoma, Arial, sans-serif" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">تكامل</text></svg>`,
+
+    igate: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#ffffff"/><path d="M22 16 L22 44 L28 50 L28 22 Z" fill="#0a0a0a"/><path d="M34 14 L34 50 L40 46 L40 10 Z" fill="#0a0a0a"/></svg>`,
+
+    shgardi: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#a01f44"/><circle cx="34" cy="18" r="3.5" fill="#f4c92f"/><path d="M22 30 L36 26 L44 36 L34 38 L40 50 L32 50 L26 40 L22 36 Z" fill="#f4c92f" stroke-linejoin="round"/></svg>`,
+
+    squadio: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#0a0a0f"/><polygon points="32,12 48,21 48,43 32,52 16,43 16,21" fill="none" stroke="#1e64ff" stroke-width="3.5" stroke-linejoin="round"/><text x="32" y="40" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#1e64ff" text-anchor="middle">S</text></svg>`,
+
+    misaan: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#2e2e4f"/><g fill="none" stroke="#dcd6e8" stroke-width="1.5"><rect x="14" y="14" width="36" height="36"/><rect x="18" y="18" width="28" height="28"/><rect x="22" y="22" width="20" height="20"/></g><path d="M22 44 L26 26 L32 36 L38 26 L42 44" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+
+    dawul: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" rx="14" fill="#ffffff"/><path d="M18 14 L30 14 L42 24 L42 40 L30 50 L18 50 Z" fill="#0d2c61"/><path d="M30 14 L42 24 L42 40 L30 50 Z" fill="#1ca8b6"/></svg>`,
+
+    munaaseb: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#ffffff"/><g fill="none" stroke="#1c8364" stroke-width="2.6" stroke-linejoin="round"><path d="M14 48 L14 28 L22 22 L30 28 L30 48"/><path d="M30 48 L30 20 L40 14 L50 20 L50 48"/><line x1="14" y1="48" x2="50" y2="48"/><line x1="22" y1="36" x2="22" y2="36.1"/><line x1="40" y1="28" x2="40" y2="28.1"/><line x1="40" y1="38" x2="40" y2="38.1"/></g></svg>`,
+
+    kfupm: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#1a6e6f"/><polygon points="32,14 41,17 41,28 32,32 23,28 23,17" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linejoin="round"/><text x="32" y="26" font-family="Arial, sans-serif" font-size="9" font-weight="800" fill="#ffffff" text-anchor="middle">KFUPM</text><text x="32" y="46" font-family="Arial, sans-serif" font-size="6" font-weight="600" fill="#ffffff" text-anchor="middle">DREAM BIG</text></svg>`,
+
+    innosoft: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#11131a"/><circle cx="32" cy="20" r="4" fill="#7c3aed"/><path d="M28 28 L36 28 L36 50 L28 50 Z" fill="#7c3aed"/></svg>`,
+
+    amlak: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#0c2e4f"/><path d="M14 50 L14 32 L32 18 L50 32 L50 50 Z" fill="none" stroke="#22d3ee" stroke-width="2.6" stroke-linejoin="round"/><rect x="26" y="38" width="12" height="12" fill="none" stroke="#22d3ee" stroke-width="2"/><text x="32" y="14" font-family="Arial" font-size="6" fill="#22d3ee" text-anchor="middle">.sy</text></svg>`,
+  };
+
+  // Build company marquee — uses real .ico files with inline SVG fallback
+  const companies = [
+    { name: 'Qawafel',          sub: 'B2B Marketplace & FinTech', key: 'qawafel'  },
+    { name: 'Al-Rajhi Bank',    sub: 'Banking Partner',           key: 'alrajhi'  },
+    { name: 'Takamol Holding',  sub: 'GovTech',                   key: 'takamol'  },
+    { name: 'Innovate Gate',    sub: 'Entrepreneurship',          key: 'igate'    },
+    { name: 'Shgardi',          sub: 'B2C Delivery App',          key: 'shgardi'  },
+    { name: 'Squadio',          sub: 'Tech Studio',               key: 'squadio'  },
+    { name: 'Misaan Nosooh',    sub: 'Wealth Management',         key: 'misaan'   },
+    { name: 'Misaan Dawul',     sub: 'P2P FinTech',               key: 'dawul'    },
+    { name: 'Munaaseb',         sub: 'PropTech',                  key: 'munaaseb' },
+    { name: 'Amlak.sy',         sub: 'PropTech',                  key: 'amlak'    },
+    { name: 'Innosoft',         sub: 'GovTech (B2G)',             key: 'innosoft' },
+    { name: 'KFUPM',            sub: 'Alma Mater',                key: 'kfupm'    },
+  ];
+
+  function chipHTML(c, dup) {
+    const svg = LOGOS[c.key] || '';
+    return `
+      <div class="company-chip"${dup ? ' aria-hidden="true"' : ''}>
+        <div class="c-logo">
+          ${svg}
+          <img src="logos/${c.key}.ico" alt="${c.name}" loading="lazy" onerror="this.remove()" />
+        </div>
+        <div class="c-name">${c.name}</div>
+        <div class="c-sub">${c.sub}</div>
+      </div>`;
+  }
+  const track = document.getElementById('marqueeTrack');
+  if (track) {
+    track.innerHTML = companies.map(c => chipHTML(c, false)).join('')
+                     + companies.map(c => chipHTML(c, true)).join('');
+  }
+
+  // ===== Inject logos into product cards =====
+  document.querySelectorAll('.product-card[data-logo]').forEach(card => {
+    const key = card.getAttribute('data-logo');
+    const wrap = document.createElement('div');
+    wrap.className = 'product-logo';
+    wrap.innerHTML = (LOGOS[key] || '') +
+      `<img src="logos/${key}.ico" alt="" loading="lazy" onerror="this.remove()" />`;
+    card.insertBefore(wrap, card.firstChild);
+  });
+
   // Nav scroll effect
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Mobile burger / drawer
+  const burger = document.getElementById('burger');
+  const drawer = document.getElementById('mobileDrawer');
+  function toggleMenu(open) {
+    const isOpen = typeof open === 'boolean' ? open : !document.body.classList.contains('menu-open');
+    document.body.classList.toggle('menu-open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    burger.setAttribute('aria-expanded', isOpen);
+  }
+  burger.addEventListener('click', () => toggleMenu());
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('menu-open')) toggleMenu(false);
   });
 
   // Reveal on scroll
