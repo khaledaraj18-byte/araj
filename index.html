@@ -725,6 +725,18 @@
     visibility: visible !important;
   }
 }
+
+    @media (max-width: 640px) {
+  .company-chip:has(img[src*="misaan"]) .c-sub {
+    font-size: 0;
+  }
+
+  .company-chip:has(img[src*="misaan"]) .c-sub::after {
+    content: "Wealth";
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
  /* HERE IS THE ENDDDDDDDDD */
   
   .company-chip .c-name {
@@ -741,6 +753,7 @@
     text-transform: uppercase;
     color: var(--text-muted);
   }
+}
 
   /* ===== Mobile Burger / Drawer ===== */
   .burger {
