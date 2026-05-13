@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -427,6 +428,7 @@
   /* Dark elevated sections — Experience, Products, Beyond */
   #experience,
   #products,
+  #insights,
   #beyond {
     background:
       radial-gradient(ellipse at 50% 0%, rgba(74, 29, 150, 0.08) 0%, transparent 60%),
@@ -436,6 +438,7 @@
   /* Top fade-in edge */
   #experience::before,
   #products::before,
+  #insights::before,
   #beyond::before {
     content: '';
     position: absolute;
@@ -448,6 +451,7 @@
   /* Bottom fade-out edge */
   #experience::after,
   #products::after,
+  #insights::after,
   #beyond::after {
     content: '';
     position: absolute;
@@ -819,6 +823,7 @@
   body.menu-open .mobile-drawer li:nth-child(5) a { transition-delay: 0.34s; }
   body.menu-open .mobile-drawer li:nth-child(6) a { transition-delay: 0.40s; }
   body.menu-open .mobile-drawer li:nth-child(7) a { transition-delay: 0.46s; }
+  body.menu-open .mobile-drawer li:nth-child(8) a { transition-delay: 0.52s; }
 
   .drawer-tagline {
     font-size: 0.7rem;
@@ -1199,6 +1204,123 @@
   @media (max-width: 480px) {
     .case-grid { grid-template-columns: 1fr; }
     .case-card { padding: 1.75rem 1.4rem; }
+  }
+
+
+  /* ===== Writing & Insights ===== */
+  .insights-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .insight-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.75rem 2rem;
+    background: linear-gradient(180deg, rgba(26, 17, 48, 0.55) 0%, rgba(17, 10, 31, 0.35) 100%);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    backdrop-filter: blur(12px);
+    transition: all 0.4s ease;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .insight-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 0;
+    background: linear-gradient(180deg, var(--purple-soft), var(--purple-glow));
+    transition: height 0.5s ease;
+  }
+
+  .insight-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+    box-shadow: 0 20px 40px -20px rgba(124, 58, 237, 0.45);
+  }
+
+  .insight-card:hover::before { height: 100%; }
+
+  .insight-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple-deep), var(--purple-rich));
+    color: var(--purple-soft);
+    box-shadow: 0 10px 30px -10px rgba(124, 58, 237, 0.55);
+    flex-shrink: 0;
+  }
+
+  .insight-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+  }
+
+  .insight-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin-bottom: 0.35rem;
+  }
+
+  .insight-category {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--purple-soft);
+  }
+
+  .insight-arrow {
+    color: var(--text-muted);
+    font-size: 1.35rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  .insight-card:hover .insight-arrow {
+    transform: translateX(4px);
+    color: var(--purple-soft);
+  }
+
+  @media (max-width: 640px) {
+    .insight-card {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 1rem;
+      padding: 1.75rem 1.4rem;
+    }
+
+    .insight-icon {
+      margin: 0 auto;
+      width: 52px;
+      height: 52px;
+    }
+
+    .insight-title {
+      font-size: 1.35rem;
+    }
+
+    .insight-arrow {
+      display: none;
+    }
   }
 
   /* ===== Education ===== */
@@ -1629,6 +1751,7 @@
       <li><a href="#skills">Skills</a></li>
       <li><a href="#products">Products</a></li>
       <li><a href="#cases">Case Studies</a></li>
+      <li><a href="#insights">Insights</a></li>
       <li><a href="#beyond">Beyond</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -1646,6 +1769,7 @@
     <li><a href="#skills">Skills</a></li>
     <li><a href="#products">Products</a></li>
     <li><a href="#cases">Case Studies</a></li>
+    <li><a href="#insights">Insights</a></li>
     <li><a href="#beyond">Beyond</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -2265,7 +2389,64 @@
 
     </div>
   </div>
+
 </section>
+
+<!-- Writing & Insights -->
+<section id="insights">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Writing &amp; Insights</div>
+      <h2 class="section-title">Product Thinking in Practice</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="insights-list">
+      <a class="insight-card reveal" href="https://linkedin.com/in/khaled-araj" target="_blank" rel="noopener noreferrer">
+        <div class="insight-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/><path d="M14 15h4"/></svg>
+        </div>
+        <div class="insight-content">
+          <h3 class="insight-title">Working with Al-Rajhi: A PM's Playbook for Bank × Startup Partnerships</h3>
+          <div class="insight-category">Embedded Finance</div>
+        </div>
+        <div class="insight-action" aria-label="Coming soon on LinkedIn">
+          <span class="insight-status">Coming Soon</span>
+          <span class="insight-arrow" aria-hidden="true">→</span>
+        </div>
+      </a>
+
+      <a class="insight-card reveal" href="https://linkedin.com/in/khaled-araj" target="_blank" rel="noopener noreferrer">
+        <div class="insight-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
+        </div>
+        <div class="insight-content">
+          <h3 class="insight-title">From Manual to Automated: Cutting Dispute Resolution at a B2B Marketplace by 30%</h3>
+          <div class="insight-category">Case Study</div>
+        </div>
+        <div class="insight-action" aria-label="Coming soon on LinkedIn">
+          <span class="insight-status">Coming Soon</span>
+          <span class="insight-arrow" aria-hidden="true">→</span>
+        </div>
+      </a>
+
+      <a class="insight-card reveal" href="https://linkedin.com/in/khaled-araj" target="_blank" rel="noopener noreferrer">
+        <div class="insight-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <div class="insight-content">
+          <h3 class="insight-title">The AI-Native PM: My Daily Workflow with Claude, Lovable, and Framer</h3>
+          <div class="insight-category">AI &amp; Product</div>
+        </div>
+        <div class="insight-action" aria-label="Coming soon on LinkedIn">
+          <span class="insight-status">Coming Soon</span>
+          <span class="insight-arrow" aria-hidden="true">→</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
 
 <!-- Education & Certificates -->
 <section id="education">
