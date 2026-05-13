@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -405,6 +404,40 @@
     position: relative;
   }
 
+  /* Dark elevated sections — Experience, Products, Beyond */
+  #experience,
+  #products,
+  #beyond {
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(74, 29, 150, 0.08) 0%, transparent 60%),
+      linear-gradient(180deg, rgba(4, 2, 10, 0.92) 0%, rgba(2, 1, 6, 0.96) 100%);
+    isolation: isolate;
+  }
+  /* Top fade-in edge */
+  #experience::before,
+  #products::before,
+  #beyond::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.25), transparent);
+    pointer-events: none;
+    z-index: 1;
+  }
+  /* Bottom fade-out edge */
+  #experience::after,
+  #products::after,
+  #beyond::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.25), transparent);
+    pointer-events: none;
+    z-index: 1;
+  }
+
   .container {
     max-width: 1100px;
     margin: 0 auto;
@@ -557,14 +590,30 @@
     position: relative;
     width: 100%;
     overflow: hidden;
-    mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
-    -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  }
+  /* Edge fade — using overlays instead of mask-image for mobile compatibility */
+  .marquee::before, .marquee::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 80px;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .marquee::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--bg-deep) 0%, rgba(10, 6, 18, 0.85) 35%, transparent 100%);
+  }
+  .marquee::after {
+    right: 0;
+    background: linear-gradient(-90deg, var(--bg-deep) 0%, rgba(10, 6, 18, 0.85) 35%, transparent 100%);
   }
   .marquee-track {
     display: flex;
     width: max-content;
     animation: marquee-scroll 32s linear infinite;
     gap: 1.5rem;
+    will-change: transform;
   }
   .marquee:hover .marquee-track { animation-play-state: paused; }
 
@@ -605,27 +654,30 @@
     border-radius: 18px;
     overflow: hidden;
     background: #ffffff;
+    padding: 8px;
     box-shadow: 0 8px 28px -10px rgba(124, 58, 237, 0.45), 0 0 0 1px rgba(255,255,255,0.05);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
   }
   .company-chip .c-logo svg,
   .company-chip .c-logo img {
-    position: absolute;
-    inset: 0;
-    width: 100%; height: 100%;
+    display: block;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
     image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
   }
   .company-chip .c-logo img {
+    position: relative;
     z-index: 1;
-    padding: 8px;
-    background: #ffffff;
   }
   .company-chip .c-logo svg {
+    position: absolute;
+    inset: 8px;
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
     z-index: 0;
   }
-  /* When .ico has no real image (background only), tint the bg */
-  .company-chip .c-logo.no-image { background: linear-gradient(135deg, var(--purple-deep), var(--purple-rich)); }
 
   @media (max-width: 900px) {
     .company-chip { width: 180px; height: 160px; padding: 1.25rem 0.85rem; }
@@ -2340,7 +2392,7 @@
 
     alrajhi: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#ffffff"/><g fill="none" stroke="#0016ff" stroke-width="3" stroke-linejoin="round"><polygon points="32,14 41,19 41,29 32,34 23,29 23,19"/><polygon points="22,30 31,35 31,45 22,50 13,45 13,35"/><polygon points="42,30 51,35 51,45 42,50 33,45 33,35"/></g></svg>`,
 
-    takamol: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#2b2e7a"/><text x="32" y="38" font-family="Tahoma, Arial, sans-serif" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">تكامل</text></svg>`,
+    takamol: ``,
 
     igate: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#ffffff"/><path d="M22 16 L22 44 L28 50 L28 22 Z" fill="#0a0a0a"/><path d="M34 14 L34 50 L40 46 L40 10 Z" fill="#0a0a0a"/></svg>`,
 
@@ -2356,14 +2408,13 @@
 
     kfupm: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#1a6e6f"/><polygon points="32,14 41,17 41,28 32,32 23,28 23,17" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linejoin="round"/><text x="32" y="26" font-family="Arial, sans-serif" font-size="9" font-weight="800" fill="#ffffff" text-anchor="middle">KFUPM</text><text x="32" y="46" font-family="Arial, sans-serif" font-size="6" font-weight="600" fill="#ffffff" text-anchor="middle">DREAM BIG</text></svg>`,
 
-    innosoft: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#11131a"/><circle cx="32" cy="20" r="4" fill="#7c3aed"/><path d="M28 28 L36 28 L36 50 L28 50 Z" fill="#7c3aed"/></svg>`,
+    innosoft: ``,
 
-    amlak: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#0c2e4f"/><path d="M14 50 L14 32 L32 18 L50 32 L50 50 Z" fill="none" stroke="#22d3ee" stroke-width="2.6" stroke-linejoin="round"/><rect x="26" y="38" width="12" height="12" fill="none" stroke="#22d3ee" stroke-width="2"/><text x="32" y="14" font-family="Arial" font-size="6" fill="#22d3ee" text-anchor="middle">.sy</text></svg>`,
+    amlak: ``,
   };
 
   // Build company marquee — uses real .ico files with inline SVG fallback
   const companies = [
-    { name: 'KFUPM',            sub: 'Alma Mater',                key: 'kfupm'    },
     { name: 'Shgardi',          sub: 'B2C Delivery App',          key: 'shgardi'  },
     { name: 'Squadio',          sub: 'Tech Studio',               key: 'squadio'  },
     { name: 'Qawafel',          sub: 'B2B MP & FinTech', key: 'qawafel'  },
@@ -2375,6 +2426,7 @@
     { name: 'Munaaseb',         sub: 'PropTech',                  key: 'munaaseb' },
     { name: 'Amlak.sy',         sub: 'PropTech',                  key: 'amlak'    },
     { name: 'Innosoft',         sub: 'GovTech (B2G)',             key: 'innosoft' },
+    { name: 'KFUPM',            sub: 'Alma Mater',                key: 'kfupm'    },
   ];
 
   function chipHTML(c, dup) {
@@ -2383,7 +2435,7 @@
       <div class="company-chip"${dup ? ' aria-hidden="true"' : ''}>
         <div class="c-logo">
           ${svg}
-          <img src="logos/${c.key}.png" alt="${c.name}" loading="lazy" onerror="this.remove()" />
+          <img src="logos/${c.key}.png" alt="${c.name}" decoding="async" onerror="this.remove()" />
         </div>
         <div class="c-name">${c.name}</div>
         <div class="c-sub">${c.sub}</div>
