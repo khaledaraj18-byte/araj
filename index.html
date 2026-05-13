@@ -609,8 +609,18 @@
   .marquee {
     position: relative;
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
     overflow: hidden;
   }
+
+  @media (max-width: 640px) {
+  .companies-wrapper,
+  .companies-marquee {
+    padding: 0 1rem;
+  }
+}
   /* Edge fade — using overlays instead of mask-image for mobile compatibility */
   .marquee::before, .marquee::after {
     content: '';
