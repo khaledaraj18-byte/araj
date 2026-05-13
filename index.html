@@ -680,70 +680,25 @@
     position: relative;
     width: 88px;
     height: 88px;
-    display: flex;
     aspect-ratio: 1 / 1;
-    align-items: center;
-    justify-content: center;
-    border-radius: 18px;
+    border-radius: 14px;
     overflow: hidden;
     background: #ffffff;
-    padding: 8px;
+    padding: 1px;
     box-shadow: 0 8px 28px -10px rgba(124, 58, 237, 0.45), 0 0 0 1px rgba(255,255,255,0.05);
     transform: translateZ(0);
     -webkit-backface-visibility: hidden;
   }
 
-  .company-chip .c-logo svg,
   .company-chip .c-logo img {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    border-radius: inherit;
     image-rendering: -webkit-optimize-contrast;
-  }  
-  .company-chip .c-logo img {
-    position: relative;
-    aspect-ratio: 1 / 1;
-    z-index: 1;
-  } 
-  .company-chip .c-logo svg {
-    position: absolute;
-    inset: 8px;
-    width: calc(100% - 16px);
-    height: calc(100% - 16px);
-    z-index: 0;
-  } 
-
-  @media (max-width: 900px) {
-    .company-chip { width: 180px; height: 160px; padding: 1.25rem 0.85rem; }
-    .company-chip .c-logo { width: 72px; height: 72px; border-radius: 14px; }
   }
 
-/* HERE IS THE STARTTTTTTTTT */  
-@media (max-width: 640px) {
-  .c-logo img {
-    display: block !important;
-    width: 42px !important;
-    height: 42px !important;
-    object-fit: contain;
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-}
-
-    @media (max-width: 640px) {
-  .company-chip:has(img[src*="misaan"]) .c-sub {
-    font-size: 0;
-  }
-
-  .company-chip:has(img[src*="misaan"]) .c-sub::after {
-    content: "Wealth MGMT";
-    font-size: 0.62rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
- /* HERE IS THE ENDDDDDDDDD */
-  
   .company-chip .c-name {
     font-size: 0.92rem;
     font-weight: 500;
@@ -757,8 +712,25 @@
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--text-muted);
+    text-align: center;
   }
-}
+
+  @media (max-width: 900px) {
+    .company-chip { width: 180px; height: 160px; padding: 1.25rem 0.85rem; }
+    .company-chip .c-logo { width: 72px; height: 72px; border-radius: 12px; }
+  }
+
+  @media (max-width: 900px) {
+    .company-chip:has(img[src*="misaan"]) .c-sub {
+      font-size: 0;
+    }
+    .company-chip:has(img[src*="misaan"]) .c-sub::after {
+      content: "Wealth MGMT";
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+  }
 
   /* ===== Mobile Burger / Drawer ===== */
   .burger {
@@ -1054,26 +1026,22 @@
   .product-card .product-logo {
     position: relative;
     width: 64px; height: 64px;
-    border-radius: 14px;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
     overflow: hidden;
     background: #ffffff;
+    padding: 1px;
     box-shadow: 0 6px 22px -8px rgba(124, 58, 237, 0.4), 0 0 0 1px rgba(255,255,255,0.05);
     flex-shrink: 0;
   }
-  .product-card .product-logo svg,
   .product-card .product-logo img {
-    position: absolute;
-    inset: 0;
-    width: 100%; height: 100%;
-    object-fit: contain;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
     image-rendering: -webkit-optimize-contrast;
   }
-  .product-card .product-logo img {
-    z-index: 1;
-    padding: 6px;
-    background: #ffffff;
-  }
-  .product-card .product-logo svg { z-index: 0; }
   .product-card .pname {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.18rem;
@@ -1470,11 +1438,17 @@
 
   /* iPad / tablets */
   @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    nav.scrolled { padding: 0.75rem 1.5rem; }
+    nav { padding: 0.6rem 1.25rem; }
+    nav.scrolled { padding: 0.45rem 1.25rem; }
     .nav-links { display: none; }
-    .burger { display: block; }
+    .burger { display: block; width: 36px; height: 36px; }
+    .burger span:nth-child(1) { top: 11px; }
+    .burger span:nth-child(2) { top: 17px; }
+    .burger span:nth-child(3) { top: 23px; }
+    body.menu-open .burger span:nth-child(1) { top: 17px; }
+    body.menu-open .burger span:nth-child(3) { top: 17px; }
     .logo { font-size: 1.4rem; }
+    .logo-img { height: 42px; }
 
     section { padding: 5rem 1.5rem; }
     .hero { padding: 6.5rem 1.5rem 3rem; min-height: auto; }
@@ -1505,9 +1479,12 @@
 
   /* Mobile landscape & large phones */
   @media (max-width: 640px) {
-    nav { padding: 0.9rem 1.25rem; }
-    nav.scrolled { padding: 0.7rem 1.25rem; }
+    nav { padding: 0.5rem 1rem; }
+    nav.scrolled { padding: 0.4rem 1rem; }
     .logo { font-size: 1.25rem; letter-spacing: 0.14em; }
+    .logo-img { height: 36px; }
+    .burger { width: 34px; height: 34px; }
+    .hero { padding-top: 5rem; }
 
     section { padding: 4rem 1.25rem; }
     .hero { padding: 6rem 1.25rem 2.5rem; }
@@ -2467,34 +2444,7 @@
 </footer>
 
 <script>
-  // ===== Inline brand SVGs (so logos always render, no external files needed) =====
-  const LOGOS = {
-    qawafel: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#1c160e"/><circle cx="32" cy="32" r="20" fill="none" stroke="#f1e8d4" stroke-width="3"/><path d="M22 36 Q26 24 36 28 Q40 30 42 34" fill="none" stroke="#f1e8d4" stroke-width="3" stroke-linecap="round"/><circle cx="40" cy="28" r="1.8" fill="#f1e8d4"/><path d="M42 34 L46 38" stroke="#f1e8d4" stroke-width="3" stroke-linecap="round"/></svg>`,
-
-    alrajhi: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#ffffff"/><g fill="none" stroke="#0016ff" stroke-width="3" stroke-linejoin="round"><polygon points="32,14 41,19 41,29 32,34 23,29 23,19"/><polygon points="22,30 31,35 31,45 22,50 13,45 13,35"/><polygon points="42,30 51,35 51,45 42,50 33,45 33,35"/></g></svg>`,
-
-    takamol: ``,
-
-    igate: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#ffffff"/><path d="M22 16 L22 44 L28 50 L28 22 Z" fill="#0a0a0a"/><path d="M34 14 L34 50 L40 46 L40 10 Z" fill="#0a0a0a"/></svg>`,
-
-    shgardi: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#a01f44"/><circle cx="34" cy="18" r="3.5" fill="#f4c92f"/><path d="M22 30 L36 26 L44 36 L34 38 L40 50 L32 50 L26 40 L22 36 Z" fill="#f4c92f" stroke-linejoin="round"/></svg>`,
-
-    squadio: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#0a0a0f"/><polygon points="32,12 48,21 48,43 32,52 16,43 16,21" fill="none" stroke="#1e64ff" stroke-width="3.5" stroke-linejoin="round"/><text x="32" y="40" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#1e64ff" text-anchor="middle">S</text></svg>`,
-
-    misaan: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#2e2e4f"/><g fill="none" stroke="#dcd6e8" stroke-width="1.5"><rect x="14" y="14" width="36" height="36"/><rect x="18" y="18" width="28" height="28"/><rect x="22" y="22" width="20" height="20"/></g><path d="M22 44 L26 26 L32 36 L38 26 L42 44" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-
-    dawul: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" rx="14" fill="#ffffff"/><path d="M18 14 L30 14 L42 24 L42 40 L30 50 L18 50 Z" fill="#0d2c61"/><path d="M30 14 L42 24 L42 40 L30 50 Z" fill="#1ca8b6"/></svg>`,
-
-    munaaseb: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#ffffff"/><g fill="none" stroke="#1c8364" stroke-width="2.6" stroke-linejoin="round"><path d="M14 48 L14 28 L22 22 L30 28 L30 48"/><path d="M30 48 L30 20 L40 14 L50 20 L50 48"/><line x1="14" y1="48" x2="50" y2="48"/><line x1="22" y1="36" x2="22" y2="36.1"/><line x1="40" y1="28" x2="40" y2="28.1"/><line x1="40" y1="38" x2="40" y2="38.1"/></g></svg>`,
-
-    kfupm: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" fill="#1a6e6f"/><polygon points="32,14 41,17 41,28 32,32 23,28 23,17" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linejoin="round"/><text x="32" y="26" font-family="Arial, sans-serif" font-size="9" font-weight="800" fill="#ffffff" text-anchor="middle">KFUPM</text><text x="32" y="46" font-family="Arial, sans-serif" font-size="6" font-weight="600" fill="#ffffff" text-anchor="middle">DREAM BIG</text></svg>`,
-
-    innosoft: ``,
-
-    amlak: ``,
-  };
-
-  // Build company marquee — uses real .ico files with inline SVG fallback
+  // Build company marquee — uses real PNG logo files
   const companies = [
     { name: 'Shgardi',          sub: 'B2C Delivery App',          key: 'shgardi'  },
     { name: 'Squadio',          sub: 'Tech Studio',               key: 'squadio'  },
@@ -2511,12 +2461,10 @@
   ];
 
   function chipHTML(c, dup) {
-    const svg = LOGOS[c.key] || '';
     return `
       <div class="company-chip"${dup ? ' aria-hidden="true"' : ''}>
         <div class="c-logo">
-          ${svg}
-          <img src="logos/${c.key}.png" alt="${c.name}" decoding="async" onerror="this.remove()" />
+          <img src="logos/${c.key}.png" alt="${c.name}" decoding="async" />
         </div>
         <div class="c-name">${c.name}</div>
         <div class="c-sub">${c.sub}</div>
@@ -2533,8 +2481,7 @@
     const key = card.getAttribute('data-logo');
     const wrap = document.createElement('div');
     wrap.className = 'product-logo';
-    wrap.innerHTML = (LOGOS[key] || '') +
-      `<img src="logos/${key}.png" alt="" loading="lazy" onerror="this.remove()" />`;
+    wrap.innerHTML = `<img src="logos/${key}.png" alt="" loading="lazy" />`;
     card.insertBefore(wrap, card.firstChild);
   });
 
