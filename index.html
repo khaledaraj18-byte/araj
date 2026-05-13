@@ -677,8 +677,10 @@
   }
   .company-chip .c-logo {
     position: relative;
-    width: 88px; height: 88px;
+    width: 88px; 
+    height: 88px;
     display: flex;
+    aspect-ratio: 1 / 1;
     align-items: center;
     justify-content: center;
     border-radius: 18px;
@@ -699,11 +701,12 @@
   }
   .company-chip .c-logo img {
     position: relative;
+    aspect-ratio: 1 / 1;
     z-index: 1;
   }
   .company-chip .c-logo svg {
     position: absolute;
-    inset: 8px;
+    inset: 0px;
     width: calc(100% - 16px);
     height: calc(100% - 16px);
     z-index: 0;
