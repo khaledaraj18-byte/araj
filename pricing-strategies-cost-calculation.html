@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0a0612" />
+<title>Pricing &amp; Cost Strategies — Khaled Araj</title>
+<meta name="description" content="A practical product thinking article by Khaled Araj on pricing strategies, cost calculation, margins, break-even analysis, and real-world pricing lessons." />
+<meta name="author" content="Khaled M. Araj" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Khaled M. Araj" />
+<meta property="og:title" content="Pricing &amp; Cost Strategies: The Hidden Engine Behind Profitable Growth" />
+<meta property="og:description" content="Pricing is not just a number. It is a system that connects cost, value, positioning, margin, and long-term growth." />
+<meta property="og:image" content="https://www.araj.app/assets/articles/pricing-strategy-hero.jpg" />
+<meta property="og:url" content="https://www.araj.app/pricing-strategies-cost-calculation.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Pricing &amp; Cost Strategies — Khaled Araj" />
+<meta name="twitter:description" content="A practical article on pricing strategies, cost calculation, margins, break-even analysis, and real-world pricing lessons." />
+<meta name="twitter:image" content="https://www.araj.app/assets/articles/pricing-strategy-hero.jpg" />
+<link rel="canonical" href="https://www.araj.app/pricing-strategies-cost-calculation.html" />
+<link rel="icon" type="image/png" href="/logos/logoKA.png" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg-deep: #0a0612;
+    --bg-base: #110a1f;
+    --bg-elev: #1a1130;
+    --purple-deep: #2a1457;
+    --purple-rich: #4a1d96;
+    --purple-glow: #7c3aed;
+    --purple-soft: #a78bfa;
+    --gold: #c9a96e;
+    --text-primary: #ece9f5;
+    --text-secondary: #b4a8d4;
+    --text-muted: #7c6b9d;
+    --border: rgba(167, 139, 250, 0.14);
+    --border-strong: rgba(167, 139, 250, 0.28);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    min-height: 100vh;
+    font-family: Inter, sans-serif;
+    line-height: 1.75;
+    background:
+      radial-gradient(ellipse at 15% 0%, rgba(124, 58, 237, 0.28), transparent 42%),
+      radial-gradient(ellipse at 88% 10%, rgba(42, 20, 87, 0.38), transparent 46%),
+      linear-gradient(180deg, #0a0612 0%, #110a1f 48%, #0a0612 100%);
+    color: var(--text-primary);
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; }
+  .site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    padding: 1rem 2rem;
+    background: rgba(10, 6, 18, 0.74);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+  .nav-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .brand img { width: 42px; height: auto; display: block; }
+  .nav-link {
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.25s ease;
+  }
+  .nav-link:hover { color: var(--purple-soft); }
+
+  .hero {
+    position: relative;
+    min-height: 76vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 9rem 1.5rem 4.5rem;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(10, 6, 18, 0.36), rgba(10, 6, 18, 0.92)),
+      linear-gradient(90deg, rgba(10, 6, 18, 0.96), rgba(10, 6, 18, 0.52), rgba(10, 6, 18, 0.9)),
+      url("assets/articles/pricing-strategy-hero.jpg") center / cover no-repeat;
+    transform: scale(1.02);
+    z-index: -2;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.5), transparent);
+  }
+  .hero-content {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+  }
+  .eyebrow {
+    display: inline-block;
+    margin-bottom: 1.3rem;
+    color: var(--purple-soft);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+  }
+  h1 {
+    max-width: 940px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(3rem, 7vw, 6.4rem);
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: 0;
+    color: var(--text-primary);
+  }
+  .hero-sub {
+    max-width: 760px;
+    margin-top: 1.6rem;
+    color: var(--text-secondary);
+    font-size: clamp(1rem, 2vw, 1.18rem);
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+  .pill {
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 0.5rem 0.9rem;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.04);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  main {
+    width: min(1120px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 5rem 0 6rem;
+  }
+  .article-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 290px;
+    gap: 3.2rem;
+    align-items: start;
+  }
+  article {
+    min-width: 0;
+  }
+  .lead-card,
+  .note-card,
+  .toc {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(26, 17, 48, 0.72), rgba(17, 10, 31, 0.54));
+  }
+  .lead-card {
+    margin-bottom: 2.8rem;
+    padding: 2rem;
+  }
+  .lead-card p {
+    color: var(--text-secondary);
+    font-size: 1.08rem;
+  }
+  h2 {
+    margin: 3.4rem 0 1.2rem;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.1rem, 4vw, 3.1rem);
+    font-weight: 500;
+    line-height: 1.05;
+  }
+  h3 {
+    margin: 2.2rem 0 0.8rem;
+    color: var(--purple-soft);
+    font-size: 1.08rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  p {
+    margin: 1rem 0;
+    color: var(--text-secondary);
+    font-size: 1rem;
+  }
+  ul {
+    margin: 1rem 0 1.5rem 1.1rem;
+    color: var(--text-secondary);
+  }
+  li { margin: 0.45rem 0; padding-left: 0.25rem; }
+  strong { color: var(--text-primary); font-weight: 600; }
+  .formula {
+    margin: 1rem 0;
+    padding: 1rem 1.15rem;
+    border: 1px solid rgba(201, 169, 110, 0.24);
+    border-radius: 12px;
+    background: rgba(201, 169, 110, 0.08);
+    color: #efe0bd;
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 0.92rem;
+    overflow-x: auto;
+  }
+  .example {
+    margin: 1.2rem 0 1.8rem;
+    padding: 1.25rem 1.35rem;
+    border-left: 3px solid var(--gold);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .example p { margin: 0.35rem 0; }
+  .feature-image {
+    margin: 3rem 0;
+    border: 1px solid var(--border-strong);
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .feature-image img {
+    display: block;
+    width: 100%;
+    max-height: 560px;
+    object-fit: cover;
+  }
+  .feature-image figcaption {
+    padding: 0.9rem 1.1rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  .quote-card {
+    margin: 3rem 0;
+    padding: 2rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 18px;
+    background:
+      radial-gradient(circle at 0% 0%, rgba(124, 58, 237, 0.2), transparent 42%),
+      rgba(26, 17, 48, 0.72);
+  }
+  .quote-card p {
+    margin: 0;
+    color: var(--text-primary);
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(1.7rem, 3vw, 2.35rem);
+    line-height: 1.2;
+  }
+  .toc {
+    position: sticky;
+    top: 6.4rem;
+    padding: 1.2rem;
+  }
+  .toc-title {
+    margin-bottom: 0.9rem;
+    color: var(--purple-soft);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .toc a {
+    display: block;
+    padding: 0.6rem 0;
+    border-top: 1px solid rgba(167, 139, 250, 0.1);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+  }
+  .toc a:hover {
+    color: var(--text-primary);
+    padding-left: 0.35rem;
+  }
+  .note-card {
+    margin-top: 1rem;
+    padding: 1.2rem;
+  }
+  .note-card p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+  }
+  .back-link {
+    display: inline-flex;
+    margin-top: 3rem;
+    color: var(--purple-soft);
+    text-decoration: none;
+    font-size: 0.84rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 1rem;
+    color: var(--text-muted);
+    text-align: center;
+    font-size: 0.84rem;
+  }
+
+  @media (max-width: 900px) {
+    .site-nav { padding: 0.75rem 1.1rem; }
+    .brand img { width: 34px; }
+    .brand span { display: none; }
+    .hero { min-height: 70vh; padding: 7rem 1.1rem 3.2rem; }
+    .article-shell { grid-template-columns: 1fr; }
+    .toc { position: static; order: -1; }
+    main { padding-top: 3rem; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Pricing & Cost Strategies: The Hidden Engine Behind Profitable Growth",
+  "description": "A practical product thinking article on pricing strategies, cost calculation, margins, break-even analysis, and real-world pricing lessons.",
+  "image": "https://www.araj.app/assets/articles/pricing-strategy-hero.jpg",
+  "author": {
+    "@type": "Person",
+    "name": "Khaled M. Araj",
+    "url": "https://www.araj.app/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Khaled M. Araj"
+  },
+  "mainEntityOfPage": "https://www.araj.app/pricing-strategies-cost-calculation.html",
+  "inLanguage": "en"
+}
+</script>
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html#home">
+        <img src="/logos/logoKA.png" alt="Khaled Araj logo" />
+        <span>Khaled M. Araj</span>
+      </a>
+      <a class="nav-link" href="index.html#insights">Back to Insights</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <div class="eyebrow">Product Thinking in Practice</div>
+      <h1>Pricing & Cost Strategies</h1>
+      <p class="hero-sub">The hidden engine behind profitable growth. Pricing is not just a number attached to a product. It is a system that connects value, cost, positioning, margin, and long-term sustainability.</p>
+      <div class="meta">
+        <span class="pill">Strategy of Product</span>
+        <span class="pill">Pricing</span>
+        <span class="pill">Cost Calculation</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="article-shell">
+      <article>
+        <section class="lead-card">
+          <p>Most businesses spend enormous amounts of time discussing sales targets, marketing campaigns, and growth initiatives. Yet one of the most powerful drivers of profitability often receives far less attention: pricing.</p>
+          <p>Pricing is not just a number attached to a product or service. It is a strategic decision that influences profitability, positioning, customer perception, and long-term sustainability.</p>
+        </section>
+
+        <section id="fundamentals">
+          <h2>Understanding the Four Fundamentals</h2>
+          <p>Before discussing pricing strategies, every business leader should understand four fundamental concepts:</p>
+          <ul>
+            <li><strong>Cost:</strong> what it takes to create and deliver a product or service.</li>
+            <li><strong>Price:</strong> what the customer pays.</li>
+            <li><strong>Value:</strong> what the customer believes the product is worth.</li>
+            <li><strong>Profit:</strong> what remains after costs are deducted from revenue.</li>
+          </ul>
+          <p>While price is a number, value is perception. Two customers may be offered the exact same product and assign completely different values to it depending on their needs, alternatives, and urgency.</p>
+          <p>This is why pricing decisions should never rely solely on costs.</p>
+        </section>
+
+        <section id="corridor">
+          <h2>The Pricing Corridor</h2>
+          <p>Every business operates within a pricing corridor:</p>
+          <div class="formula">Cost ≤ Price ≤ Perceived Value</div>
+          <p>Cost establishes the floor. Selling below cost means every additional sale increases losses.</p>
+          <p>Perceived value establishes the ceiling. Charging more than customers believe the product is worth eventually pushes them toward alternatives.</p>
+          <p>The role of strategy is determining where your business should position itself between those two boundaries.</p>
+        </section>
+
+        <section id="costs">
+          <h2>Understanding Costs</h2>
+          <p>One of the biggest mistakes entrepreneurs make is not fully understanding their cost structure.</p>
+
+          <h3>Fixed Costs</h3>
+          <p>Fixed costs remain relatively stable regardless of how much you sell.</p>
+          <ul>
+            <li>Office rent</li>
+            <li>Salaries</li>
+            <li>Software subscriptions</li>
+            <li>Insurance</li>
+            <li>Internet services</li>
+          </ul>
+
+          <h3>Variable Costs</h3>
+          <p>Variable costs increase as sales increase.</p>
+          <ul>
+            <li>Raw materials</li>
+            <li>Packaging</li>
+            <li>Shipping fees</li>
+            <li>Payment gateway charges</li>
+            <li>Sales commissions</li>
+          </ul>
+          <p>Understanding this distinction allows businesses to accurately calculate profitability and determine how many sales are required to sustain operations.</p>
+        </section>
+
+        <section id="formulas">
+          <h2>The Most Important Pricing Formulas</h2>
+
+          <h3>Profit Formula</h3>
+          <div class="formula">Profit = Revenue − Total Costs</div>
+          <div class="formula">Revenue = Price × Quantity Sold</div>
+          <div class="formula">Total Costs = Fixed Costs + Variable Costs</div>
+          <p>Revenue growth alone means very little if total costs grow faster.</p>
+
+          <h3>Contribution Margin</h3>
+          <p>Contribution margin measures how much each sale contributes toward covering fixed costs and generating profit.</p>
+          <div class="formula">Contribution Margin = Selling Price − Variable Cost</div>
+          <div class="example">
+            <p><strong>Example:</strong> Selling Price = SAR 18, Variable Cost = SAR 6</p>
+            <p>Contribution Margin = SAR 12</p>
+            <p>Each additional sale contributes SAR 12 toward fixed costs and eventually profit.</p>
+          </div>
+
+          <h3>Break-Even Point</h3>
+          <p>The break-even point answers a critical question: how many units must we sell before we stop losing money?</p>
+          <div class="formula">Break-Even Units = Fixed Costs ÷ Contribution Margin</div>
+          <div class="example">
+            <p><strong>Example:</strong> Fixed Costs = SAR 24,000, Contribution Margin = SAR 12</p>
+            <p>Break-Even Point = 24,000 ÷ 12 = 2,000 units</p>
+            <p>Everything sold beyond this point generates profit.</p>
+          </div>
+
+          <h3>Gross Margin</h3>
+          <div class="formula">Gross Margin (%) = (Revenue − COGS) ÷ Revenue × 100</div>
+          <p>Higher gross margins generally indicate stronger pricing power or operational discipline.</p>
+
+          <h3>Operating Margin</h3>
+          <div class="formula">Operating Margin (%) = (Revenue − COGS − Operating Expenses) ÷ Revenue × 100</div>
+          <p>This metric provides a clearer picture of profitability than revenue alone.</p>
+
+          <h3>Markup vs. Margin</h3>
+          <div class="formula">Markup (%) = (Price − Cost) ÷ Cost</div>
+          <div class="formula">Margin (%) = (Price − Cost) ÷ Price</div>
+          <div class="example">
+            <p><strong>Example:</strong> Cost = SAR 100, Price = SAR 150</p>
+            <p>Markup = 50%</p>
+            <p>Margin = 33.3%</p>
+            <p>Confusing the two can lead to serious pricing errors.</p>
+          </div>
+        </section>
+
+        <figure class="feature-image">
+          <img src="assets/articles/pricing-strategy-framework.avif" alt="Pricing strategy framework illustration" />
+          <figcaption>Pricing strategy works best when cost structure, customer value, and market alternatives are evaluated together.</figcaption>
+        </figure>
+
+        <section id="strategies">
+          <h2>Pricing Strategies Every Business Should Know</h2>
+          <p>There is no single correct pricing strategy. The right approach depends on your market, customers, and economics.</p>
+
+          <h3>Cost-Based Pricing</h3>
+          <p>This method starts with costs and adds a desired margin.</p>
+          <div class="formula">Selling Price = Unit Cost × (1 + Markup Percentage)</div>
+          <p>It is simple and easy to justify but often ignores customer willingness to pay.</p>
+
+          <h3>Value-Based Pricing</h3>
+          <p>Value-based pricing focuses on the economic value delivered to customers. Rather than asking, “How much does this cost us?”, businesses ask, “How much is this worth to our customers?”</p>
+          <p>If a solution saves a customer SAR 100,000 annually, charging SAR 10,000–30,000 may represent excellent value for both parties.</p>
+
+          <h3>Competition-Based Pricing</h3>
+          <p>This approach considers competitor prices and market expectations. Businesses can match the market, price below competitors, or position themselves at a premium.</p>
+          <p>However, blindly matching competitors without understanding their economics can destroy profitability.</p>
+
+          <h3>Penetration Pricing</h3>
+          <p>Low initial prices are used to gain market share quickly. This strategy works only if there is a clear path to future profitability.</p>
+
+          <h3>Price Skimming</h3>
+          <p>Businesses launch with premium prices and gradually reduce them over time. This strategy is common in technology products and consumer electronics.</p>
+
+          <h3>Dynamic Pricing</h3>
+          <p>Prices change based on demand, supply, timing, or customer behavior. Airlines, hotels, and ride-hailing platforms are common examples.</p>
+
+          <h3>Freemium Models</h3>
+          <p>Basic services are offered for free while advanced capabilities require payment. Examples include Spotify, Dropbox, Slack, and Canva.</p>
+
+          <h3>Bundling</h3>
+          <p>Multiple products or services are combined into a single offer to increase perceived value. Microsoft 365 is a classic example of effective bundling.</p>
+        </section>
+
+        <section id="real-world">
+          <h2>Lessons from the Real World</h2>
+          <p>Some companies demonstrate the power of thoughtful pricing.</p>
+          <ul>
+            <li><strong>Netflix</strong> continuously increased prices as its content library expanded and customer value improved.</li>
+            <li><strong>Slack</strong> used a freemium model to drive adoption before converting teams into paying enterprise customers.</li>
+            <li><strong>Costco</strong> generates significant profitability through membership fees rather than relying solely on product margins.</li>
+          </ul>
+          <p>Other companies serve as cautionary tales.</p>
+          <ul>
+            <li><strong>MoviePass</strong> offered unlimited cinema access at a price that ignored unit economics. Heavy users created larger losses with every use.</li>
+            <li><strong>Juicero</strong> priced itself as a premium innovation despite offering limited customer value.</li>
+            <li><strong>Quibi</strong> attempted to charge for short-form mobile content while competing against free alternatives like TikTok and YouTube.</li>
+          </ul>
+          <p>Each failure misunderstood one side of the pricing equation: costs, value, or competition.</p>
+        </section>
+
+        <section id="process">
+          <h2>Pricing Is a Continuous Process</h2>
+          <p>Pricing should not be reviewed once a year and forgotten. Strong organizations continuously:</p>
+          <ul>
+            <li>Monitor competitors</li>
+            <li>Review margins</li>
+            <li>Recalculate break-even points</li>
+            <li>Test pricing structures</li>
+            <li>Evaluate customer willingness to pay</li>
+            <li>Refine packaging and offers</li>
+          </ul>
+          <p>The market evolves. Customer expectations evolve. Pricing strategies should evolve as well.</p>
+        </section>
+
+        <section id="final-thoughts">
+          <h2>Final Thoughts</h2>
+          <p>Businesses that excel at pricing ask better questions.</p>
+          <ul>
+            <li>What value are we creating?</li>
+            <li>What does it cost us to deliver that value?</li>
+            <li>What alternatives do customers have?</li>
+            <li>How much profit do we need to sustain growth?</li>
+            <li>How can we defend our position over time?</li>
+          </ul>
+          <div class="quote-card">
+            <p>Costs define the floor. Customer value defines the ceiling. Strategy determines where you choose to operate between them.</p>
+          </div>
+          <p>The companies that master this balance do more than grow revenue. They build healthier businesses, protect their margins, and create sustainable competitive advantages that last.</p>
+        </section>
+
+        <a class="back-link" href="index.html#insights">← Back to Product Thinking</a>
+      </article>
+
+      <aside class="toc" aria-label="Article sections">
+        <div class="toc-title">In This Article</div>
+        <a href="#fundamentals">Four fundamentals</a>
+        <a href="#corridor">Pricing corridor</a>
+        <a href="#costs">Understanding costs</a>
+        <a href="#formulas">Important formulas</a>
+        <a href="#strategies">Pricing strategies</a>
+        <a href="#real-world">Real-world lessons</a>
+        <a href="#process">Continuous process</a>
+        <a href="#final-thoughts">Final thoughts</a>
+        <div class="note-card">
+          <p>Practical product notes by Khaled M. Araj. Built for founders, operators, and product teams thinking about profitable growth.</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>© 2026 · Khaled M. Araj</footer>
+</body>
+</html>
