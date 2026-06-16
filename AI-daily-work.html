@@ -1,1 +1,496 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0a0612" />
+<title>The AI-Native PM — Khaled Araj</title>
+<meta name="description" content="How AI changed the way I build products as a Product Manager, from thinking and research to prototyping, documentation, and stakeholder alignment." />
+<meta name="author" content="Khaled M. Araj" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Khaled M. Araj" />
+<meta property="og:title" content="The AI-Native PM: How AI Changed the Way I Build Products" />
+<meta property="og:description" content="AI does not replace product thinking. Used well, it removes operational friction and gives Product Managers more room for judgment." />
+<meta property="og:image" content="https://www.araj.app/logos/AI-heroz.avif" />
+<meta property="og:url" content="https://www.araj.app/AI-daily-work" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="The AI-Native PM — Khaled Araj" />
+<meta name="twitter:description" content="How AI changed the way I build products as a Product Manager." />
+<meta name="twitter:image" content="https://www.araj.app/logos/AI-heroz.avif" />
+<link rel="canonical" href="https://www.araj.app/AI-daily-work" />
+<link rel="icon" type="image/png" href="/logos/logoKA.png" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg-deep: #0a0612;
+    --bg-base: #110a1f;
+    --bg-elev: #1a1130;
+    --purple-deep: #2a1457;
+    --purple-rich: #4a1d96;
+    --purple-glow: #7c3aed;
+    --purple-soft: #a78bfa;
+    --gold: #c9a96e;
+    --text-primary: #ece9f5;
+    --text-secondary: #b4a8d4;
+    --text-muted: #7c6b9d;
+    --border: rgba(167, 139, 250, 0.14);
+    --border-strong: rgba(167, 139, 250, 0.28);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    min-height: 100vh;
+    font-family: Inter, sans-serif;
+    line-height: 1.75;
+    background:
+      radial-gradient(ellipse at 15% 0%, rgba(124, 58, 237, 0.28), transparent 42%),
+      radial-gradient(ellipse at 88% 10%, rgba(42, 20, 87, 0.38), transparent 46%),
+      linear-gradient(180deg, #0a0612 0%, #110a1f 48%, #0a0612 100%);
+    color: var(--text-primary);
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; }
+  .site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    padding: 1rem 2rem;
+    background: rgba(10, 6, 18, 0.74);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+  .nav-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .brand img { width: 42px; height: auto; display: block; }
+  .nav-link {
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.25s ease;
+  }
+  .nav-link:hover { color: var(--purple-soft); }
+
+  .hero {
+    position: relative;
+    z-index: 0;
+    isolation: isolate;
+    min-height: 76vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 9rem 1.5rem 4.5rem;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(10, 6, 18, 0.28), rgba(10, 6, 18, 0.9)),
+      linear-gradient(90deg, rgba(10, 6, 18, 0.96), rgba(10, 6, 18, 0.48), rgba(10, 6, 18, 0.84)),
+      url("/logos/AI-heroz.avif") center / cover no-repeat;
+    transform: scale(1.02);
+    z-index: -1;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.5), transparent);
+    z-index: 1;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    width: min(1120px, 100%);
+    margin: 0 auto;
+  }
+  .eyebrow {
+    display: inline-block;
+    margin-bottom: 1.3rem;
+    color: var(--purple-soft);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+  }
+  h1 {
+    max-width: 940px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(3rem, 7vw, 6.4rem);
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: 0;
+    color: var(--text-primary);
+  }
+  .hero-sub {
+    max-width: 760px;
+    margin-top: 1.6rem;
+    color: var(--text-secondary);
+    font-size: clamp(1rem, 2vw, 1.18rem);
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+  .pill {
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 0.5rem 0.9rem;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.04);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  main {
+    width: min(1120px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 5rem 0 6rem;
+  }
+  .article-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 290px;
+    gap: 3.2rem;
+    align-items: start;
+  }
+  article { min-width: 0; }
+  .lead-card,
+  .note-card,
+  .toc {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(26, 17, 48, 0.72), rgba(17, 10, 31, 0.54));
+  }
+  .lead-card {
+    margin-bottom: 2.8rem;
+    padding: 2rem;
+  }
+  .lead-card p {
+    color: var(--text-secondary);
+    font-size: 1.08rem;
+  }
+  h2 {
+    margin: 3.4rem 0 1.2rem;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.1rem, 4vw, 3.1rem);
+    font-weight: 500;
+    line-height: 1.05;
+  }
+  h3 {
+    margin: 2.2rem 0 0.8rem;
+    color: var(--purple-soft);
+    font-size: 1.08rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  p {
+    margin: 1rem 0;
+    color: var(--text-secondary);
+    font-size: 1rem;
+  }
+  ul {
+    margin: 1rem 0 1.5rem 1.1rem;
+    color: var(--text-secondary);
+  }
+  li { margin: 0.45rem 0; padding-left: 0.25rem; }
+  strong { color: var(--text-primary); font-weight: 600; }
+  .example {
+    margin: 1.2rem 0 1.8rem;
+    padding: 1.25rem 1.35rem;
+    border-left: 3px solid var(--gold);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .feature-image {
+    margin: 3rem 0;
+    border: 1px solid var(--border-strong);
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .feature-image img {
+    display: block;
+    width: 100%;
+    max-height: 560px;
+    object-fit: cover;
+  }
+  .feature-image figcaption {
+    padding: 0.9rem 1.1rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  .quote-card {
+    margin: 3rem 0;
+    padding: 2rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 18px;
+    background:
+      radial-gradient(circle at 0% 0%, rgba(124, 58, 237, 0.2), transparent 42%),
+      rgba(26, 17, 48, 0.72);
+  }
+  .quote-card p {
+    margin: 0;
+    color: var(--text-primary);
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(1.7rem, 3vw, 2.35rem);
+    line-height: 1.2;
+  }
+  .toc {
+    position: sticky;
+    top: 6.4rem;
+    padding: 1.2rem;
+  }
+  .toc-title {
+    margin-bottom: 0.9rem;
+    color: var(--purple-soft);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .toc a {
+    display: block;
+    padding: 0.6rem 0;
+    border-top: 1px solid rgba(167, 139, 250, 0.1);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+  }
+  .toc a:hover {
+    color: var(--text-primary);
+    padding-left: 0.35rem;
+  }
+  .note-card {
+    margin-top: 1rem;
+    padding: 1.2rem;
+  }
+  .note-card p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+  }
+  .back-link {
+    display: inline-flex;
+    margin-top: 3rem;
+    color: var(--purple-soft);
+    text-decoration: none;
+    font-size: 0.84rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 1rem;
+    color: var(--text-muted);
+    text-align: center;
+    font-size: 0.84rem;
+  }
+
+  @media (max-width: 900px) {
+    .site-nav { padding: 0.75rem 1.1rem; }
+    .brand img { width: 34px; }
+    .brand span { display: none; }
+    .hero { min-height: 70vh; padding: 7rem 1.1rem 3.2rem; }
+    .article-shell { grid-template-columns: 1fr; }
+    .toc { position: static; order: -1; }
+    main { padding-top: 3rem; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The AI-Native PM: How AI Changed the Way I Build Products",
+  "description": "A practical product thinking article on how AI supports modern product management workflows.",
+  "image": "https://www.araj.app/logos/AI-heroz.avif",
+  "author": {
+    "@type": "Person",
+    "name": "Khaled M. Araj",
+    "url": "https://www.araj.app/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Khaled M. Araj"
+  },
+  "mainEntityOfPage": "https://www.araj.app/AI-daily-work",
+  "inLanguage": "en"
+}
+</script>
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html#home">
+        <img src="/logos/logoKA.png" alt="Khaled Araj logo" />
+      </a>
+      <a class="nav-link" href="index.html#insights">Back to Insights</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <div class="eyebrow">Product Thinking in Practice</div>
+      <h1>The AI-Native PM</h1>
+      <p class="hero-sub">How AI changed the way I build products, from thinking and research to prototyping, requirements, stakeholder alignment, and faster validation.</p>
+      <div class="meta">
+        <span class="pill">AI &amp; Product</span>
+        <span class="pill">Workflow</span>
+        <span class="pill">Product Management</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="article-shell">
+      <article>
+        <section class="lead-card">
+          <p>The role of a Product Manager has always been demanding. We are expected to understand customers, align stakeholders, prioritize competing requests, write clear requirements, support engineering teams, communicate with leadership, and make decisions in environments filled with uncertainty.</p>
+          <p>The challenge has never been a lack of work. It has always been determining where our attention creates the most value.</p>
+        </section>
+
+        <section id="shift">
+          <h2>How AI Changed the Work</h2>
+          <p>For years, much of a Product Manager's time was consumed by operational overhead: writing documentation from scratch, organizing ideas, preparing presentations, summarizing meetings, researching competitors, and transforming scattered thoughts into structured outputs.</p>
+          <p>Artificial Intelligence has fundamentally changed that reality.</p>
+          <p>I no longer think of AI as a productivity hack or an occasional assistant. Instead, I view it as an extension of my workflow. It removes friction from repetitive tasks and gives me more time to focus on the aspects of product management that truly require human judgment.</p>
+          <p>This shift has led to the emergence of what many now call the AI-Native Product Manager.</p>
+        </section>
+
+        <section id="thinking">
+          <h2>AI Doesn't Replace Product Thinking</h2>
+          <p>One of the biggest misconceptions surrounding AI is the belief that it replaces critical thinking. In my experience, the opposite is true.</p>
+          <p>AI amplifies the quality of thinking when used correctly. Rather than starting from a blank page, I use AI to challenge assumptions, identify blind spots, explore alternative perspectives, and pressure-test ideas before they become commitments.</p>
+          <div class="quote-card">
+            <p>AI can generate options. It cannot own outcomes. The responsibility for decisions remains entirely human.</p>
+          </div>
+          <p>The difference matters. Product judgment, accountability, and ownership cannot be outsourced.</p>
+        </section>
+
+        <section id="tools">
+          <h2>Using the Right Tool for the Right Problem</h2>
+          <p>No single AI tool excels at everything. Each has its strengths, and understanding where each one fits has become an increasingly valuable skill.</p>
+
+          <h3>ChatGPT as a thinking partner</h3>
+          <p>I frequently rely on ChatGPT as a thinking partner. It helps structure ideas, improve communication, explore frameworks, and refine strategic discussions. It often acts as the first sounding board before concepts are shared with teams or stakeholders.</p>
+
+          <h3>Claude for dense information</h3>
+          <p>Claude has become particularly useful when working with large amounts of information. Reviewing lengthy documents, extracting insights from customer interviews, refining detailed requirements, and identifying hidden patterns in complex discussions are areas where it performs exceptionally well.</p>
+
+          <h3>Lovable for fast product visualization</h3>
+          <p>One of the most transformative additions to my workflow has been Lovable.</p>
+          <p>Traditionally, validating an idea involved multiple handoffs. Product teams documented requirements, designers translated them into interfaces, and engineering teams eventually built prototypes. Valuable feedback often arrived late in the process.</p>
+          <p>Today, tools like Lovable allow me to bridge that gap. Instead of describing an idea through bullet points and hoping everyone imagines the same outcome, I can quickly generate prototypes and visualize how an experience might look and behave.</p>
+        </section>
+
+        <figure class="feature-image">
+          <img src="/logos/lovable.jpg" alt="Lovable AI-powered web development platforms" />
+          <figcaption>Lovable helps turn product ideas into tangible experiences that stakeholders can see, react to, and challenge earlier.</figcaption>
+        </figure>
+
+        <section id="lovable">
+          <h2>Why Lovable Changes the Conversation</h2>
+          <p>More importantly, Lovable helps me imagine what the final product could become. It transforms abstract concepts into tangible experiences.</p>
+          <p>Stakeholders react differently when they can interact with something they can see rather than interpret something they have to imagine.</p>
+          <div class="example">
+            <p><strong>The result:</strong> conversations become more concrete, assumptions surface earlier, alignment happens faster, and the distance between an idea and validation becomes dramatically shorter.</p>
+          </div>
+        </section>
+
+        <section id="ecosystem">
+          <h2>Beyond ChatGPT, Claude, and Lovable</h2>
+          <p>The AI ecosystem continues to evolve at an extraordinary pace. Tools such as Perplexity have changed how many professionals approach research and information gathering.</p>
+          <p>Cursor is reshaping how developers interact with code. Notion AI improves organizational workflows and documentation. GitHub Copilot accelerates software development. Midjourney and other generative design tools expand creative possibilities.</p>
+          <p>New platforms emerge almost weekly. The lesson is not that Product Managers should adopt every new tool that appears. The lesson is that AI literacy is becoming an essential professional capability.</p>
+          <p>Knowing which tool to use, when to use it, and where human judgment must intervene is increasingly becoming part of the modern Product Manager's skill set.</p>
+        </section>
+
+        <section id="limits">
+          <h2>What AI Still Cannot Do</h2>
+          <p>Despite the rapid advancement of these technologies, some responsibilities remain deeply human.</p>
+          <ul>
+            <li>AI cannot build trust with stakeholders.</li>
+            <li>It cannot navigate organizational dynamics.</li>
+            <li>It cannot understand the emotional nuance behind customer frustrations.</li>
+            <li>It cannot balance trade-offs that involve ethics, politics, timing, and long-term strategic priorities.</li>
+            <li>Most importantly, it cannot be accountable.</li>
+          </ul>
+          <p>Product management has always been a discipline centered around judgment under uncertainty. That has not changed.</p>
+        </section>
+
+        <section id="rise">
+          <h2>The Rise of the AI-Native Product Manager</h2>
+          <p>The Product Managers who thrive over the next decade may not necessarily be those who write the most detailed specifications manually. Instead, they may be the ones who can:</p>
+          <ul>
+            <li>Ask better questions.</li>
+            <li>Distinguish signal from noise.</li>
+            <li>Validate assumptions faster.</li>
+            <li>Turn ideas into experiments quickly.</li>
+            <li>Leverage AI without becoming dependent on it.</li>
+            <li>Combine human intuition with machine efficiency.</li>
+          </ul>
+          <p>In many ways, AI fluency today resembles spreadsheet literacy twenty years ago. It is no longer a competitive advantage reserved for a few early adopters. It is gradually becoming part of the baseline expectation.</p>
+        </section>
+
+        <section id="final-thoughts">
+          <h2>Final Thoughts</h2>
+          <p>Being an AI-Native Product Manager is not about outsourcing your thinking. It is about elevating it.</p>
+          <p>AI has not reduced the importance of product management. If anything, it has amplified it. As operational friction decreases, the quality of our decisions becomes even more visible.</p>
+          <p>The future of product management is not a competition between humans and machines. It is a partnership.</p>
+          <div class="quote-card">
+            <p>AI helps us move faster, explore further, and communicate more clearly. But customer understanding, difficult trade-offs, and accountability remain deeply human.</p>
+          </div>
+          <p>The best Product Managers will not be those who resist AI, nor those who blindly rely on it. They will be the ones who learn how to think with it.</p>
+        </section>
+
+        <a class="back-link" href="index.html#insights">← Back to Product Thinking</a>
+      </article>
+
+      <aside class="toc" aria-label="Article sections">
+        <div class="toc-title">In This Article</div>
+        <a href="#shift">How AI changed the work</a>
+        <a href="#thinking">Product thinking</a>
+        <a href="#tools">Right tool, right problem</a>
+        <a href="#lovable">Why Lovable matters</a>
+        <a href="#ecosystem">The AI ecosystem</a>
+        <a href="#limits">What AI cannot do</a>
+        <a href="#rise">AI-native PMs</a>
+        <a href="#final-thoughts">Final thoughts</a>
+        <div class="note-card">
+          <p>Practical product notes by Khaled M. Araj on AI, product workflow, and building faster without losing judgment.</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>© 2026 · Khaled M. Araj</footer>
+</body>
+</html>
+
